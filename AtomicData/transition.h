@@ -1,0 +1,1 @@
+Upper_level   2J(degeneracy-1)    lower_level   2J    Transition_energy[eV]   UTA_width[eV]   Weighted_oscillator_strength  Transtition_rate[1/s]  Gaussian_standard_deviation   Correction_to_the_oscillator_strength_due_to_configuration_interaction

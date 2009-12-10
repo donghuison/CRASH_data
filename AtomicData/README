@@ -1,0 +1,9 @@
+In this directory the unprocessed atomic date are collected,
+as provided by the FAC code (Rafael Rodrigez, University of 
+LasPalmas de Gran Canaria.
+
+The data are organized into the folders, the name of the folder being the
+chemical element denotation for NUCLEI. In each of the folders the energy level
+files names have a prefix which is the chemical element denotation for the 
+isoelectron configuration.
+
