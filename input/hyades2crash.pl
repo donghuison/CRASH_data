@@ -1,15 +1,25 @@
 #!/usr/bin/perl
 use strict;
 my $FileIn = $ARGV[0] or die "Usage: hyades2crash.pl HYADESFILE.dat";
-my $FileOut = $FileIn; $FileOut =~ s/.dat$/.out/;
+my $FileOut = $FileIn; 
 
-print "$FileIn --> $FileOut\n";
+$FileOut =~ s/.dat$/.out/;
+
+$FileOut =~ /(\w\w).out/;
+my $Material = $1;
+
+print "$FileIn --> $FileOut, for material $Material\n";
 
 open (FILEIN, $FileIn) or die "Could not open FileIn=$FileIn\n";
 # Ignore header
 <FILEIN>;
 <FILEIN>;
-my @Numbers = split(' ', join('', <FILEIN>));
+my $Numbers = join('', <FILEIN>);
+
+# Add space in front of negative numbers
+$Numbers =~ s/(\d)(\-\d\.)/$1 $2/g;
+
+my @Numbers = split(' ', $Numbers);
 close FILEIN;
 
 print "nNumbers = ",scalar @Numbers,"\n";
@@ -37,7 +47,7 @@ print FILEOUT "Hyades $FileIn, units: [kg/m3] [K] [Pa] [J/kg]\n";
 print FILEOUT "0 0.0 -2 1 2\n";
 print FILEOUT "$n1 $n2\n";
 print FILEOUT "0.0\n";
-print FILEOUT "logRho logTe p Eint version\n";
+print FILEOUT "logRho logTe p$Material Eint$Material version\n";
 my $i;
 my $j;
 for $j (0..$n2-1){
