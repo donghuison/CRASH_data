@@ -1,0 +1,262 @@
+This file describes the set of manipulations done with the file:
+
+hyades2d_1.1ns_stagger.out
+
+The result of the conversion is in the file: 
+
+hyades2d_1.1ns_stagger.converted
+
+First, a new column is introduced, 'region' instead of the empty column 
+'laserpower'. It has the value:
+(2) (Vacuum) for the points where density is zero (the border points) or 0.0010 
+(the right top portion of the computational domain. In these points only the 
+iLevel column is informative)
+(1) ("Rest") The points where the hyades set pressure to be zero.
+(0) ("Real points") Other points, in some of which the pressure is still fudged
+
+Then, I sorted out 'real points' for plastic (2 for polyimide, 4 for acrylic). 
+I did not apply the EOS for acrylic, although it is implemented now.
+
+Then I overwrote the fudged pressure throughout all the cells using the CRASH
+eos with the settings:
+UseExcitation = .true.
+UseCoulombCorrection = .false.
+DoEliminateStates = .true. (as we use in the CRASH code now). This procedure is applied 
+to all the points, except for Vacuum. ONLY IN THE "REST" POINTS then I checked if the
+pressure is below 1e5 N/m2 and in such points the pressure is reset set to 1e6 dyne/cm2
+and temperatures are modified accordingly.
+
+Below are:
+1. Statistics for the original file.
+2. Statistics for the converted file.
+3. Final version of the converter (to be put to util/CRASH/src) and extra lines to 
+util/CRASH/src/Makefile 
+========================= FOR ORIGINAL FILE============================================
+ Number of points= 24321
+ Number of points in Vacuum= 3959
+ Number of points in Rest= 6870
+ Among them:
+ In material # 0   -  4169  points
+ In material # 1   -  343  points
+ In material # 2   -  722  points
+ In material # 3   -  261  points
+ In material # 4   -  1375  points
+ Number of real points:= 13492
+
+     Among them in the material #:  0   -   8631  points,
+                           probably, fudged are -  3289  points,
+ Demnsity min. max:   5.1643536000000002E-03   0.1746212840000000
+ Presure min. max:   6.2608605999999997E+02   8.7936355500000000E+11
+ TElectron min. max:   8.4694420000000004E-04   6.9374643299999997E-02
+ TIon min. max:   5.0001129999999996E-04   0.3357831836000000
+
+     Among them in the material #:  1   -   4457  points,
+                           probably, fudged are -  42  points,
+ Demnsity min. max:   4.8563999999999998E-06   7.6113400458999996
+ Presure min. max:   6.9661100800000000E+08   5.0868242100000000E+13
+ TElectron min. max:   5.1451400000000000E-05   1.4481980801000001
+ TIon min. max:   5.1396700000000002E-05  12.5615873337000004
+
+     Among them in the material #:  2   -   113  points,
+                           probably, fudged are -  53  points,
+ Demnsity min. max:   0.4856372476000000   1.4930506944999999
+ Presure min. max:   1.2194464000000000E+09   1.4756527500000000E+12
+ TElectron min. max:   4.2002009999999999E-04   6.1555187999999999E-03
+ TIon min. max:   4.1959419999999998E-04   6.1323050999999998E-03
+
+     Among them in the material #:  3   -   139  points,
+                           probably, fudged are -  22  points,
+ Demnsity min. max:  10.8556833266999995  45.9949226378999967
+ Presure min. max:   4.1583941100000000E+09   3.1826777200000000E+13
+ TElectron min. max:   5.0165499999999999E-05   2.1045805899999999E-02
+ TIon min. max:   5.0035499999999999E-05   2.1045552600000000E-02
+
+     Among them in the material #:  4   -   152  points,
+                           probably, fudged are -  52  points,
+ Demnsity min. max:   0.2888952792000000   1.2599118948000001
+ Presure min. max:   6.6353295400000000E+09   2.5054093000000000E+12
+ TElectron min. max:   3.8453220000000000E-04   1.2350142900000000E-02
+ TIon min. max:   3.8442320000000002E-04   1.2338146600000001E-02
+!====================STATISTICS FOR THE CONVERTED FILE============
+NOTE: the 'REST' points are counted, but the new state there is
+not analized and is not included to the statistics
+ Number of points= 24321
+ Number of points in Vacuum= 3959
+ Number of points in Rest= 6870
+ Among them:
+ In material # 0   -  4169  points
+ In material # 1   -  343  points
+ In material # 2   -  722  points
+ In material # 3   -  261  points
+ In material # 4   -  1375  points
+ Number of real points:= 13492
+
+     Among them in the material #:  0   -   8631  points,
+   
+ Demnsity min. max:   5.1643536000000002E-03   0.1746212840000000
+ Presure min. max:   2.5836024898037083E+07   9.0248220954891833E+11
+ TElectron min. max:   8.4694420000000004E-04   6.9374643299999997E-02
+ TIon min. max:   5.0001129999999996E-04   0.3357831836000000
+
+     Among them in the material #:  1   -   4457  points,
+                        
+ Demnsity min. max:   4.8563999999999998E-06   7.6113400458999996
+ Presure min. max:   3.3286881623593450E+09   2.4545609055418863E+13
+ TElectron min. max:   5.1451400000000000E-05   1.4481980801000001
+ TIon min. max:   5.1396700000000002E-05  12.5615873337000004
+
+     Among them in the material #:  2   -   113  points,
+                           
+ Demnsity min. max:   0.4856372476000000   1.4930506944999999
+ Presure min. max:   5.8463184346748161E+10   1.0368204321212178E+12
+ TElectron min. max:   4.2002009999999999E-04   6.1555187999999999E-03
+ TIon min. max:   4.1959419999999998E-04   6.1323050999999998E-03
+
+     Among them in the material #:  3   -   139  points,
+                           ,
+ Demnsity min. max:  10.8556833266999995  45.9949226378999967
+ Presure min. max:   5.6332921932748899E+09   9.9057036659740586E+12
+ TElectron min. max:   5.0165499999999999E-05   2.1045805899999999E-02
+ TIon min. max:   5.0035499999999999E-05   2.1045552600000000E-02
+
+     Among them in the material #:  4   -   152  points,
+                          
+ Demnsity min. max:   0.2888952792000000   1.2599118948000001
+ Presure min. max:   4.3807170159310257E+10   2.2907988310461191E+12
+ TElectron min. max:   3.8453220000000000E-04   1.2350142900000000E-02
+ TIon min. max:   3.8442320000000002E-04   1.2338146600000001E-02
+
+====================convert.f90=============================
+program convert
+  use ModIoUnit
+  use ModConst
+  use CRASH_ModEos,ONLY: fix_hyades_state
+  use CRASH_ModAtomicDataMix
+  use CRASH_ModExcitationData
+  use CRASH_ModExcitation
+  use CRASH_ModPartition
+  !-----------
+  implicit none
+  integer:: i, iUnit,iUnitNew,iUnitPl
+  character(LEN=180):: TypeLine
+  character(LEN=34):: TypeShort
+  integer::iLevel_I(201*121),iRegion_I(201*121)
+  real::Read_I(9,201*121),Density_I(201*121)
+
+  real,parameter:: PressureMinSi = 1.0e5 !1Atm
+  integer,parameter::Vac_=2
+  integer::iMaterial
+  ! ----------
+  UseExcitation = .true.
+  DoStateElimination = .true.
+  iUnit = io_unit_new()
+  open(iUnit,file='hyades2d_1.1ns_stagger.out',status='OLD')
+  iUnitNew = io_unit_new()
+  open(iUnitNew,file='converted.out',status='replace')
+  iUnitPl = io_unit_new()
+  open(iUnitPl,file='plastic.out',status='replace')
+  do i=1,5
+     read(iUnit, '(a)',err=100,end=100)TypeLine
+     write(*,*)trim(TypeLine)
+     write(iUnitNew,'(a)')trim(TypeLine)
+  end do
+  do i=1,201*121
+     read(iUnit,'(F13.10,4F14.10,e17.8,3F14.10,a,i2)',err=100,end=100)&
+          Read_I(:,i),TypeShort,iLevel_I(i)
+     !Check pressure positivity
+     if(Read_I(6,i)<0.0)then
+        write(*,*)Read_I(:,i),TypeShort
+        stop
+     end if
+     iRegion_I(i) = 0.0
+     !Check vacuum
+     if(Read_I(5,i)==0.0.or.Read_I(5,i)==0.0010)then
+        !Only iMeterial is meaningfull, VACUUM (iRegion=Vac_)
+        iRegion_I(i) = Vac_
+     elseif(Read_I(6,i)==0.0)then
+        iRegion_I(i) = 1  !Medium is at rest
+        if(iLevel_I(i)==2)then !Sort out acrylic iLevel=4
+           if(abs(Read_I(5,i)-1.150)<0.001)iLevel_I(i)=4
+        end if
+     end if
+     if(iRegion_I(i)==0.and.iLevel_I(i)==2) then
+        !By observation, at 0.021<x<0.036 acrylic is present only with density
+        !close to 1.15, while at x<0.021 polyimide is not present at all
+        !and at x>0.036 acryllic is not present at all
+        if(Read_I(1,i)<0.021)then
+           iLevel_I(i)=4
+        elseif(Read_I(1,i)<0.036.and.abs(Read_I(5,i)-1.150)<0.05)then
+           iLevel_I(i)=4
+        end if
+        iMaterial=2
+        if(iRegion_I(i)/=Vac_)call fix_hyades_state(&
+             iMaterial, read_I(5:8,i)) 
+        write(iUnitPl,'(F13.10,4F14.10,e17.8,3F14.10,a,2i2)')&
+             Read_I(:,i),trim(TypeShort),iLevel_I(i),iRegion_I(i)
+     else
+        if(iRegion_I(i)/=Vac_)then
+           if(iLevel_I(i)/=4)then
+              iMaterial = iLevel_I(i)
+           else
+              iMaterial = 2
+           end if
+
+           if(iRegion_I(i)==1)then
+              call fix_hyades_state(&
+                   iMaterial, read_I(5:8,i), PressureMinSi)
+           else
+              call fix_hyades_state(&
+                   iMaterial, read_I(5:8,i))
+           end if
+        end if
+
+        write(iUnitNew,'(F13.10,4F14.10,e17.8,3F14.10,a,2i2)')&
+             Read_I(:,i),trim(TypeShort),iLevel_I(i),iRegion_I(i)
+     end if
+
+  end do
+  write(*,*)'Number of points=',201*121
+  write(*,*)'Number of points in Vacuum=',count(iRegion_I(:)==2)
+  write(*,*)'Number of points in Rest=',count(iRegion_I(:)==1)
+  write(*,*)'Among them:'
+  do i=0,4
+     write(*,*)'In material #',i, '  - ',count(iRegion_I==1.and.iLevel_I==i),' points'
+  end do
+  write(*,*)'Number of real points:=',count(iRegion_I==0)
+  do i =0,4
+     write(*,*)
+     write(*,*)'    Among them in the material #: ',i,'  -  ', &
+          count(iRegion_I==0.and.iLevel_I==i),' points,'
+     write(*,*)'                          probably, fudged are - ',&
+          count(iRegion_I==0.and.iLevel_I==i.and.Read_I(8,:)<0.0010),' points,'
+     write(*,*)'Demnsity min. max:',&
+          minval(Read_I(5,:),MASK=iRegion_I==0.and.iLevel_I==i), &
+          maxval(Read_I(5,:),MASK=iRegion_I==0.and.iLevel_I==i)
+     write(*,*)'Presure min. max:',&
+          minval(Read_I(6,:),MASK=iRegion_I==0.and.iLevel_I==i), &
+          maxval(Read_I(6,:),MASK=iRegion_I==0.and.iLevel_I==i)
+     write(*,*)'TElectron min. max:',&
+          minval(Read_I(7,:),MASK=iRegion_I==0.and.iLevel_I==i), &
+          maxval(Read_I(7,:),MASK=iRegion_I==0.and.iLevel_I==i)
+     write(*,*)'TIon min. max:',&
+          minval(Read_I(8,:),MASK=iRegion_I==0.and.iLevel_I==i), &
+          maxval(Read_I(8,:),MASK=iRegion_I==0.and.iLevel_I==i)
+  end do
+100 continue
+  close(iUnit);close(iUnitNew);close(iUnitPl)
+end program convert
+subroutine CON_stop
+  stop
+end subroutine CON_stop
+subroutine CON_set_do_test
+  stop
+end subroutine CON_set_do_test
+====================To be inserted to the Makefile===============
+convert.o : ${LIBSHARE} ${LIBTIMING} ${MY_LIB}
+
+CONVERT: convert.o
+	rm -rf Tmp_; mkdir Tmp_ ;
+	cd Tmp_; ar -x ${MY_LIB}; ar -x ${LIBTIMING}; ar -x ${LIBSHARE};
+	${LINK.f90} -o CONVERT.exe convert.o Tmp_/*.o \
+		${Lflag1}    ; 
+	rm -rf Tmp_ 
