@@ -25,3 +25,11 @@ following ranges for the electron temperature and atomic concentration:
 
 
 The opacity table are for 30 logarithmically groups in the photon energy range of 0.1eV to 20keV
+
+
+The following opacity settings are used
+
+#OPACITY
+T                       UseExcitation
+F                       UseCoulombCorrection
+T                       DoStateElimination
