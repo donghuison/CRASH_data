@@ -8,6 +8,21 @@
 0.1			EnergyPhotonMin
 2.0e+04			EnergyPhotonMax
 
+#USEEOSTABLE
+T			Use Eos Table for Xe
+T			Use Eos Table for Be
+T			Use Eos Table for Pl
+T			Use Eos Table for Au
+F			Use Eos Table for Ay
+
+#USEOPACTABLE
+T			Use Opac Table for Xe
+T			Use Opac Table for Be
+T			Use Opac Table for Pl
+T			Use Opac Table for Au
+F			Use Opac Table for Ay
+
+
 #USERINPUTEND    ----------------------
 
 ----------------OPACITY TABLES----------
