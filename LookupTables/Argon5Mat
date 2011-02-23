@@ -25,6 +25,8 @@ T			Use Opac Table for Pl
 T			Use Opac Table for Au
 T			Use Opac Table for Ay
 
+#RHOINSIDE
+2.0                     RhoDimInside
 
 #USERINPUTEND    ----------------------
 
