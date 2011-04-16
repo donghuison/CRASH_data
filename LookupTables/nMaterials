@@ -1,0 +1,51 @@
+!Included file for 5 materials
+!It is assumed that the dataCRASH/LookupTables directory is linked to the 
+!run directory with the name "Tables"
+
+#USERINPUTBEGIN  ----------------------
+
+#GROUPRANGE
+0.1			EnergyPhotonMin
+2.0e+04			EnergyPhotonMax
+
+#MATERIAL
+Xe
+Be
+Pl
+Au
+Ay
+
+#USEEOSTABLE
+T			Use Eos Table for Xe
+T			Use Eos Table for Be
+T			Use Eos Table for Pl
+T			Use Eos Table for Au
+T			Use Eos Table for Ay
+
+#USEOPACTABLE
+T			Use Opac Table for Xe
+T			Use Opac Table for Be
+T			Use Opac Table for Pl
+T			Use Opac Table for Au
+T			Use Opac Table for Ay
+
+
+#USERINPUTEND    ----------------------
+
+#INCLUDE
+PARAM.Xe.CRASH
+
+#INCLUDE
+PARAM.Be.CRASH
+
+#INCLUDE
+PARAM.Pl.CRASH
+
+#INCLUDE
+PARAM.Au.CRASH
+
+#INCLUDE
+PARAM.Ay.CRASH
+
+
+#END

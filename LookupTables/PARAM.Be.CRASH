@@ -1,0 +1,35 @@
+
+----------------EOS TABLE-------------
+
+#LOOKUPTABLE
+Be_eos		        NameTable
+load			NameCommand
+Tables/Be_eos_CRASH.dat
+real8			TypeFile
+EOS(Te, Na) for  Be
+logTe logNa P E Pe Ee Cv Cve Gamma GammaE TeTi Cond Z Z2
+201			nIndex1
+3.0E-2			Index1Min (eV)
+2.0E+3			Index1Max (eV)
+201                     nIndex2
+1.0E+23			Index2Min (m-3)
+2.0E+29			Index2Max (m-3)
+
+----------------OPACITY TABLE----------
+
+#LOOKUPTABLE
+Be_opac		        NameTable
+load			NameCommand
+Tables/Be_opac_CRASH.dat
+real8			TypeFile
+Opacity(rho,Te) for Be
+logrho logT Planck(30) Ross(30)
+201			nIndex1
+1.4964999074619E-03	Index1Min (kg/m3)
+2.9929998149238E+03	Index1Max (kg/m3)
+201                     nIndex2
+3.0E-2			Index2Min (eV)
+2.0E+3			Index2Max (eV)
+
+#END
+
