@@ -1,6 +1,7 @@
 !Included file for 5 materials
 !It is assumed that the dataCRASH/LookupTables directory is linked to the 
 !run directory with the name "Tables"
+!To modify a material see the comments beow the END command 
 
 #USERINPUTBEGIN  ----------------------
 
@@ -29,6 +30,8 @@ T			Use Opac Table for Pl
 T			Use Opac Table for Au
 T			Use Opac Table for Ay
 
+#RHOINSIDE
+6.50                    RhoInsideDim
 
 #USERINPUTEND    ----------------------
 
@@ -49,3 +52,10 @@ Tables/PARAM.Ay.CRASH
 
 
 #END
+
+If one needs to change Xe for, say, Ar (or H_) AND to use PROPACEOS tables for it 
+1. Change Xe => Ar below the command #MATERIALS (necessary) 
+and in the comments below #USE...TABLE commands
+2. Change the table name in the #INCLUDE command: Xe.CRASH => Ar.PRISM
+3. Adjust density inside the tube (RhoDimInside - should be the density inside
+   the tube expressed in rg/m3
