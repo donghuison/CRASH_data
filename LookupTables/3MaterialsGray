@@ -1,0 +1,60 @@
+Include file for 3 materials with gray radiation.
+It is assumed that the dataCRASH/LookupTables directory 
+is linked to the run directory with the name "Tables"
+
+#USERINPUTBEGIN  ----------------------
+
+#USEEOSTABLE
+T			Use Eos Table for Xe
+T			Use Eos Table for Be
+T			Use Eos Table for Pl
+F			Use Eos Table for Au
+F			Use Eos Table for Ay
+
+#USERINPUTEND    ----------------------
+
+----------------EOS TABLES----------
+
+#LOOKUPTABLE
+Xe_eos		        NameTable
+load			NameCommand
+Tables/Xe_eos_CRASH.dat
+real8			TypeFile
+EOS(Te, Na) for Xe
+logTe logNa P E Pe Ee Cv Cve Gamma GammaE TeTi Cond Z Z2
+201			nIndex1
+3.0E-2			Index1Min (eV)
+1.0E+3			Index1Max (eV)
+201                     nIndex2
+1.0E+24			Index2Min (m-3)
+1.0E+29			Index2Max (m-3)
+
+#LOOKUPTABLE
+Be_eos		        NameTable
+load			NameCommand
+Tables/Be_eos_CRASH.dat
+real8			TypeFile
+EOS(Te, Na) for  Be
+logTe logNa P E Pe Ee Cv Cve Gamma GammaE TeTi Cond Z Z2
+201			nIndex1
+3.0E-2			Index1Min (eV)
+2.0E+3			Index1Max (eV)
+201                     nIndex2
+1.0E+23			Index2Min (m-3)
+2.0E+29			Index2Max (m-3)
+
+#LOOKUPTABLE
+Pl_eos		        NameTable
+load			NameCommand
+Tables/Pl_eos_CRASH.dat
+real8			TypeFile
+EOS(Te, Na) for Pl
+logTe logNa P E Pe Ee Cv Cve Gamma GammaE TeTi Cond Z Z2
+201			nIndex1
+5.0E-2			Index1Min (eV)
+1.0E+2			Index1Max (eV)
+201                     nIndex2
+1.0E+24			Index2Min (m-3)
+1.5E+29			Index2Max (m-3)
+
+#END
