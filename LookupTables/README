@@ -1,11 +1,20 @@
 Both the CRASH EOS and opacity tables are created with the
 following ranges for the electron temperature and atomic concentration:
 
-  integer, parameter :: IndexDefault_I(2)=(/201, 201/), Min_=1, Max_=2
-  real,dimension(Min_:Max_,Xe_:Ay_), parameter::&
-       TeDefault_II = reshape(&     ! original minimum
+  integer, parameter :: Min_=1, Max_=2, &
+                        IndexDefaultEos_I(2) = (/201, 201/)
+  integer, public    :: IndexDefaultOpac_I(2)= (/201, 201/)
+  real,dimension(Min_:Max_,0:nMaterialMax-1), parameter::&
+       TeDefaultEos_II = reshape(&     ! original minimum
+       (/1.0e-2, 1.0e+3, & !Xe_     1e-2
+         1.0e-3, 4.0e+3, & !Be_     1e-3
+         1.0e-3, 1.0e+2, & !Plastic 1e-3
+         1.0e-3, 1.0e+2, & !Au_     1e-3
+         1.0e-3, 1.0e+2  & !Ay_     1e-3
+         /), (/2,5/)),    &
+       TeDefaultOpac_II = reshape(&     ! original minimum
        (/3.0e-2, 1.0e+3, & !Xe_     1e-2
-         3.0e-2, 2.0e+3, & !Be_     1e-3
+         3.0e-2, 4.0e+3, & !Be_     1e-3
          5.0e-2, 1.0e+2, & !Plastic 1e-3
          2.0e-1, 1.0e+2, & !Au_     1e-3
          5.0e-2, 1.0e+2  & !Ay_     1e-3
