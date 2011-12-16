@@ -1,7 +1,14 @@
-!Included file for 5 materials
-!It is assumed that the dataCRASH/LookupTables directory is linked to the 
-!run directory with the name "Tables"
-!To modify a material see the comments beow the END command 
+Example how to use arbitrary number and kind of materials. 
+
+It is assumed that the dataCRASH/LookupTables directory is linked to the 
+run directory with the name "Tables".
+
+If one needs to change Xe for, say, Ar (or H_) AND to use PROPACEOS tables:
+
+1. Change Xe => Ar below the command #MATERIALS
+2. Change the table name in the #INCLUDE command: Xe.CRASH => Ar.PRISM
+3. Adjust density inside the tube as needed:
+   RhoInsideDim is the density inside the tube expressed in kg/m3
 
 #USERINPUTBEGIN  ----------------------
 
@@ -10,25 +17,25 @@
 2.0e+04			EnergyPhotonMax
 
 #MATERIAL
-Xe
-Be
-Pl
-Au
-Ay
+Xe			NameMaterial 1
+Be			NameMaterial 2
+Pl			NameMaterial 3
+Au			NameMaterial 4
+Ay			NameMaterial 5
 
 #USEEOSTABLE
-T			Use Eos Table for Xe
-T			Use Eos Table for Be
-T			Use Eos Table for Pl
-T			Use Eos Table for Au
-T			Use Eos Table for Ay
+T			Use Eos Table for material 1
+T			Use Eos Table for material 2
+T			Use Eos Table for material 3
+T			Use Eos Table for material 4
+T			Use Eos Table for material 5
 
 #USEOPACTABLE
-T			Use Opac Table for Xe
-T			Use Opac Table for Be
-T			Use Opac Table for Pl
-T			Use Opac Table for Au
-T			Use Opac Table for Ay
+T			Use Opac Table for material 1
+T			Use Opac Table for material 2
+T			Use Opac Table for material 3
+T			Use Opac Table for material 4
+T			Use Opac Table for material 5
 
 #RHOINSIDE
 6.50                    RhoInsideDim
@@ -50,12 +57,5 @@ Tables/PARAM.Au.CRASH
 #INCLUDE
 Tables/PARAM.Ay.CRASH
 
-
 #END
 
-If one needs to change Xe for, say, Ar (or H_) AND to use PROPACEOS tables for it 
-1. Change Xe => Ar below the command #MATERIALS (necessary) 
-and in the comments below #USE...TABLE commands
-2. Change the table name in the #INCLUDE command: Xe.CRASH => Ar.PRISM
-3. Adjust density inside the tube (RhoDimInside - should be the density inside
-   the tube expressed in rg/m3

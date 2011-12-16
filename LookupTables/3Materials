@@ -1,6 +1,6 @@
-!Included file for 5 materials
-!It is assumed that the dataCRASH/LookupTables directory is linked to the 
-!run directory with the name "Tables"
+Include file for 3 materials with multigroup radiation.
+It is assumed that the dataCRASH/LookupTables directory 
+is linked to the run directory with the name "Tables"
 
 #USERINPUTBEGIN  ----------------------
 
