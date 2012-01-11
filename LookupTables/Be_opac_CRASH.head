@@ -1,0 +1,22 @@
+  
+----------------OPACITY TABLE----------
+  
+#LOOKUPTABLE
+Be_opac                 NameTable
+use param               NameCommand
+Tables/Be_opac_CRASH.dat
+real8                   TypeFile
+ EvMin EvMax
+0.1000000E+00
+0.2000000E+05
+Opacity(rho,Te) for Be
+logRho logTe Planck(30)  Ross(30)
+ 201                    nIndex1
+0.1496500E-02           Index1Min (kg/m3)
+0.2993000E+04           Index1Max (kg/m3)
+ 201                    nIndex2
+0.3000000E-01           Index2Min (eV)
+0.4000000E+04           Index2Max (eV)
+  
+#END
+  
