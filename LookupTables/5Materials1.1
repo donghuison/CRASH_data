@@ -1,173 +1,35 @@
-!Included file for 5 materials
-!It is assumed that the dataCRASH/LookupTables directory is linked to the 
-!run directory with the name "Tables"
+! Include file for the standard 5 CRASH materials
+! using the ARTEP opacity table for Xenon
+! and the 1.1eV minimum energy CRASH opacity tables.
+! The Tables subdirectory should exist in the run directory.
+! and has to be a link to the dataCRASH/LookupTables directory
+! which is a link to the CRASH_data repository.
 
 #USERINPUTBEGIN  ----------------------
 
-#GROUPRANGE
-1.1			EnergyPhotonMin
-2.0e+04			EnergyPhotonMax
+#EOSTABLE
+T			UseEosTables
 
-#USEEOSTABLE
-T			Use Eos Table for Xe
-T			Use Eos Table for Be
-T			Use Eos Table for Pl
-T			Use Eos Table for Au
-T			Use Eos Table for Ay
-
-#USEOPACTABLE
-T			Use Opac Table for Xe
-T			Use Opac Table for Be
-T			Use Opac Table for Pl
-T			Use Opac Table for Au
-T			Use Opac Table for Ay
-
+#OPACITYTABLE
+T			UseOpacityTables
 
 #USERINPUTEND    ----------------------
 
-----------------OPACITY TABLES----------
+! The ARTEP data file has to be in the run directory!
+#LOOKUPTABLE
+Xe_opac				        NameTable
+load					NameCommand
+Xe_opac_ARTEP.dat
+real8					TypeFile
 
 #LOOKUPTABLE
-Xe_opac		        NameTable
-load			NameCommand
-Tables/Xe_opac_ARTEP.dat
-real8			TypeFile
-Opacity(rho,Te) for Xe
-logrho logT Planck(30) Ross(30)
-201			nIndex1
-0.21801430476		Index1Min (kg/m3)
-2.1801430476E+04	Index1Max (kg/m3)
-201			nIndex2
-3.0E-2			Index2Min (eV)
-1.0E+3			Index2Max (eV)
-
+{Be Pl Au Ay}_opac		        NameTable
+load					NameCommand
+Tables/{Be Pl Au Ay}_opac_CRASH1.1.dat
+real8					TypeFile
 
 #LOOKUPTABLE
-Be_opac		        NameTable
-load			NameCommand
-Tables/Be_opac_CRASH1.1.dat
-real8			TypeFile
-Opacity(rho,Te) for Be
-logrho logT Planck(30) Ross(30)
-201			nIndex1
-1.4964999074619E-03	Index1Min (kg/m3)
-2.9929998149238E+03	Index1Max (kg/m3)
-201                     nIndex2
-3.0E-2			Index2Min (eV)
-2.0E+3			Index2Max (eV)
-
-#LOOKUPTABLE
-Pl_opac		        NameTable
-load			NameCommand
-Tables/Pl_opac_CRASH1.1.dat
-real8			TypeFile
-Opacity(rho,Te) for Pl
-logrho logT Planck(30) Ross(30)
-201			nIndex1
-1.62789127801646E-02	Index1Min (kg/m3)
-2.44183691702469E+03	Index1Max (kg/m3)
-201                     nIndex2
-5.0E-2			Index2Min (eV)
-1.0E+2			Index2Max (eV)
-
-#LOOKUPTABLE
-Au_opac		        NameTable
-load			NameCommand
-Tables/Au_opac_CRASH1.1.dat
-real8			TypeFile
-Opacity(rho,Te) for Au
-logrho logT Planck(30) Ross(30)
-201			nIndex1
-0.3270688818768		Index1Min (kg/m3)
-3.9248265825216E+04	Index1Max (kg/m3)
-201                     nIndex2
-2.0E-1			Index2Min (eV)
-1.0E+2			Index2Max (eV)
-
-#LOOKUPTABLE
-Ay_opac		        NameTable
-load			NameCommand
-Tables/Ay_opac_CRASH1.1.dat
-real8			TypeFile
-Opacity(rho,Te) for Au
-logrho logT Planck(30) Ross(30)
-201			nIndex1
-1.1083255751072E-02	Index1Min (kg/m3)
-1.6624883626608E+03	Index1Max (kg/m3)
-201                     nIndex2
-5.0E-2			Index2Min (eV)
-1.0E+2			Index2Max (eV)
-
-----------------EOS TABLES----------
-
-#LOOKUPTABLE
-Xe_eos		        NameTable
-load			NameCommand
+{Xe Be Pl Au Ay}_eos		        NameTable
+load					NameCommand
 Tables/Xe_eos_CRASH.dat
-real8			TypeFile
-EOS(Te, Na) for Xe
-logTe logNa P E Pe Ee Cv Cve Gamma GammaE TeTi Cond Z Z2
-201			nIndex1
-3.0E-2			Index1Min (eV)
-1.0E+3			Index1Max (eV)
-201                     nIndex2
-1.0E+24			Index2Min (m-3)
-1.0E+29			Index2Max (m-3)
-
-#LOOKUPTABLE
-Be_eos		        NameTable
-load			NameCommand
-Tables/Be_eos_CRASH.dat
-real8			TypeFile
-EOS(Te, Na) for  Be
-logTe logNa P E Pe Ee Cv Cve Gamma GammaE TeTi Cond Z Z2
-201			nIndex1
-3.0E-2			Index1Min (eV)
-2.0E+3			Index1Max (eV)
-201                     nIndex2
-1.0E+23			Index2Min (m-3)
-2.0E+29			Index2Max (m-3)
-
-#LOOKUPTABLE
-Pl_eos		        NameTable
-load			NameCommand
-Tables/Pl_eos_CRASH.dat
-real8			TypeFile
-EOS(Te, Na) for Pl
-logTe logNa P E Pe Ee Cv Cve Gamma GammaE TeTi Cond Z Z2
-201			nIndex1
-5.0E-2			Index1Min (eV)
-1.0E+2			Index1Max (eV)
-201                     nIndex2
-1.0E+24			Index2Min (m-3)
-1.5E+29			Index2Max (m-3)
-
-#LOOKUPTABLE
-Au_eos		        NameTable
-load			NameCommand
-Tables/Au_eos_CRASH.dat
-real8			TypeFile
-EOS(Te, Na) for Au
-logTe logNa P E Pe Ee Cv Cve Gamma GammaE TeTi Cond Z Z2
-201			nIndex1
-2.0E-1			Index1Min (eV)
-1.0E+2			Index1Max (eV)
-201                     nIndex2
-1.0E+24			Index2Min (m-3)
-1.2E+29			Index2Max (m-3)
-
-#LOOKUPTABLE
-Ay_eos		        NameTable
-load			NameCommand
-Tables/Ay_eos_CRASH.dat
-real8			TypeFile
-EOS(Te, Na) for Ay
-logTe logNa P E Pe Ee Cv Cve Gamma GammaE TeTi Cond Z Z2
-201			nIndex1
-5.0E-2			Index1Min (eV)
-1.0E+2			Index1Max (eV)
-201                     nIndex2
-1.0E+24			Index2Min (m-3)
-1.5E+29			Index2Max (m-3)
-
-#END
+real8					TypeFile
