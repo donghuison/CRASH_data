@@ -12,10 +12,9 @@ If one needs to change Xe for, say, Ar (or H_) AND to use PROPACEOS tables:
 
 #USERINPUTBEGIN  ----------------------
 
-#GROUPRANGE
-0.1			EnergyPhotonMin
-2.0e+04			EnergyPhotonMax
-
+In principal the order of materials should be arbitrary.
+The current code (EOS as well as the user module) relies
+on a fixed order. This should be fixed in the future.
 #MATERIAL
 Xe			NameMaterial 1
 Be			NameMaterial 2
@@ -23,39 +22,29 @@ Pl			NameMaterial 3
 Au			NameMaterial 4
 Ay			NameMaterial 5
 
-#USEEOSTABLE
-T			Use Eos Table for material 1
-T			Use Eos Table for material 2
-T			Use Eos Table for material 3
-T			Use Eos Table for material 4
-T			Use Eos Table for material 5
+#EOSTABLE
+T			UseEosTables
 
-#USEOPACTABLE
-T			Use Opac Table for material 1
-T			Use Opac Table for material 2
-T			Use Opac Table for material 3
-T			Use Opac Table for material 4
-T			Use Opac Table for material 5
+#OPACITYTABLE
+T			UseOpacityTables
 
+! Define the initial density inside the tube (default is for Xe)
 #RHOINSIDE
 6.50                    RhoInsideDim
 
 #USERINPUTEND    ----------------------
 
 #INCLUDE
-Tables/PARAM.Xe.CRASH
+Param/CRASH/TABLE_Xe.in
 
 #INCLUDE
-Tables/PARAM.Be.CRASH
+Param/CRASH/TABLE_Be.in
 
 #INCLUDE
-Tables/PARAM.Pl.CRASH
+Param/CRASH/TABLE_Pl.in
 
 #INCLUDE
-Tables/PARAM.Au.CRASH
+Param/CRASH/TABLE_Au.in
 
 #INCLUDE
-Tables/PARAM.Ay.CRASH
-
-#END
-
+Param/CRASH/TABLE_Ay.in
