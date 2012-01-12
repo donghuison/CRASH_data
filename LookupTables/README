@@ -1,4 +1,10 @@
 This directory contains the "standard" lookup tables for CRASH and some
 input files that can be included into the PARAM.in file.
+The default lookup tables were created with the Param/CRASH/TABLE*.in
+include files.
 
-One can generate custom CRASH lookup tables by running the CRASH code.
+One can generate custom CRASH lookup tables by running the CRASH code
+and using the appropriate #LOOKUPTABLE commands.
+
+Some useful lookup tables are stored in the LookupTables directory 
+on the CRASH disk on nyx (/nfs/crash_ls/) also mounted on herot (/crash_disk)
