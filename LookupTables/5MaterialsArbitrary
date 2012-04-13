@@ -46,20 +46,5 @@ Param/CRASH/TABLE_Pl.in
 #INCLUDE
 Param/CRASH/TABLE_Au.in
 
-INCLUDE
+#INCLUDE
 Param/CRASH/TABLE_Ay.in
-
-The above include statement is replaced temporarily because the 
-Param/CRASH/TABLE_Ay*.in files were not committed for CRASH_v3dot1
-
-#LOOKUPTABLE
-Ay_eos					NameTable
-load					NameCommand
-Tables/Ay_eos_CRASH.dat			NameFile
-real8					TypeFile
-
-#LOOKUPTABLE
-Ay_opac					NameTable
-load					NameCommand
-Tables/Ay_opac_CRASH.dat		NameFile
-real8					TypeFile
