@@ -5,6 +5,9 @@
 
 #SOLIDSTATE
 T			UseSolidState
+reflectall		TypeBcSolid
+user			TypeGeometrySolid
+1.0			DtLimitSolid
 
 #USERINPUTBEGIN  ----------------------
 
