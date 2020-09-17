@@ -6,10 +6,10 @@
 #SOLIDSTATE
 T			UseSolidState
 reflectall		TypeBcSolid
-user			TypeGeometrySolid
-1.0			DtLimitSolid
+user			TypeSolidGeometry
+1.0			SolidLimitDt
 
-#USERINPUTBEGIN  ----------------------
+#USERINPUTBEGIN -----------------------------------
 
 #EOSTABLE
 T			UseEosTables
@@ -25,7 +25,7 @@ T			UseOpacityTables
 0.28			VaporizationTiAu
 0.06			VaporizationTiAy
 
-#USERINPUTEND    ----------------------
+#USERINPUTEND -------------------------------------
 
 #INCLUDE
 Param/CRASH/TABLE_Xe.in
