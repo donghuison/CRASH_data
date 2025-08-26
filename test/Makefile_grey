@@ -1,0 +1,42 @@
+# Makefile for Grey Opacity Test
+FC = gfortran
+FFLAGS = -O2 -Wall -g
+LDFLAGS = 
+
+# Target executable
+TARGET = test_grey_opacity
+
+# Source files
+SOURCES = crash_opacity_reader.f90 grey_opacity_calculator.f90 test_grey_opacity.f90
+OBJECTS = crash_opacity_reader.o grey_opacity_calculator.o test_grey_opacity.o
+
+# Default target
+all: $(TARGET)
+
+# Build the executable
+$(TARGET): $(OBJECTS)
+	$(FC) $(FFLAGS) -o $@ $(OBJECTS) $(LDFLAGS)
+	@echo "Build complete: $(TARGET)"
+
+# Compile modules
+crash_opacity_reader.o: crash_opacity_reader.f90
+	$(FC) $(FFLAGS) -c $<
+
+grey_opacity_calculator.o: grey_opacity_calculator.f90
+	$(FC) $(FFLAGS) -c $<
+
+# Compile main program (depends on modules)
+test_grey_opacity.o: test_grey_opacity.f90 crash_opacity_reader.o grey_opacity_calculator.o
+	$(FC) $(FFLAGS) -c $<
+
+# Run the test
+run: $(TARGET)
+	@echo "Running Grey Opacity test..."
+	./$(TARGET)
+
+# Clean build files
+clean:
+	rm -f *.o *.mod $(TARGET)
+	@echo "Clean complete"
+
+.PHONY: all clean run
